@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PenghuniController;
+use App\Http\Controllers\RumahController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,10 @@ Route::get('/penghunis/{id}/edit', [PenghuniController::class, 'edit'])->name('p
 Route::put('/penghunis/{id}', [PenghuniController::class, 'update'])->name('penghunis.update');
 Route::delete('/penghunis/{id}', [PenghuniController::class, 'destroy'])->name('penghunis.destroy');
 
+Route::get('/rumah', [RumahController::class, 'index']);
+Route::post('/rumah', [RumahController::class, 'store']);
+Route::get('/rumah/{id}', [RumahController::class, 'show']);
+Route::put('/rumah/{id}', [RumahController::class, 'update']);
 
 Route::get('/test-api', function () {
     return response()->json([
