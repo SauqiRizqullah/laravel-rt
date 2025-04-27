@@ -6,6 +6,7 @@ use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\RumahController;
 use App\Http\Controllers\RiwayatPenghuniRumahController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PengeluaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +38,9 @@ Route::get('/pembayaran/{id}', [PembayaranController::class, 'show']);
 Route::post('/pembayaran', [PembayaranController::class, 'store']);
 Route::put('/pembayaran/{id}', [PembayaranController::class, 'update']);
 Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy']);
+
+Route::get('/pengeluaran', [PengeluaranController::class, 'index']);
+Route::post('/pengeluaran', [PengeluaranController::class, 'store']);
 
 Route::get('/test-api', function () {
     return response()->json([
