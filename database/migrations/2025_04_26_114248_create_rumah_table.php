@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('current_penghuni_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('current_penghuni_id')->references('id')->on('penghuni')->onDelete('set null');
+            $table->foreign('current_penghuni_id')->references('id')->on('penghunis')->onDelete('set null');
         });
     }
 
