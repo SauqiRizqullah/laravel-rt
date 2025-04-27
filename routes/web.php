@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PenghuniController;
 use App\Http\Controllers\RumahController;
 use App\Http\Controllers\RiwayatPenghuniRumahController;
+use App\Http\Controllers\PembayaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +31,12 @@ Route::put('/rumah/{id}', [RumahController::class, 'update']);
 Route::get('/riwayat-penghuni-rumah/create', [RiwayatPenghuniRumahController::class, 'create'])->name('riwayatpenghunirumah.create');
 Route::get('/rumah/{id}/riwayat', [RiwayatPenghuniRumahController::class, 'show'])->name('riwayatpenghunirumah.show');
 Route::get('/riwayat-penghuni-rumah/{id}/edit', [RiwayatPenghuniRumahController::class, 'edit'])->name('riwayatpenghunirumah.edit');
+
+Route::get('/pembayaran', [PembayaranController::class, 'index']);
+Route::get('/pembayaran/{id}', [PembayaranController::class, 'show']);
+Route::post('/pembayaran', [PembayaranController::class, 'store']);
+Route::put('/pembayaran/{id}', [PembayaranController::class, 'update']);
+Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy']);
 
 Route::get('/test-api', function () {
     return response()->json([
