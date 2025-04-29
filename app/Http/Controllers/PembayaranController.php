@@ -22,7 +22,7 @@ class PembayaranController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'rumah_id' => 'required|exists:rumahs,id',
+            'rumah_id' => 'required|exists:rumah,id',
             'penghuni_id' => 'required|exists:penghunis,id',
             'bulan' => 'required|integer|between:1,12',
             'tahun' => 'required|integer',
@@ -41,7 +41,7 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::findOrFail($id);
 
         $data = $request->validate([
-            'rumah_id' => 'sometimes|exists:rumahs,id',
+            'rumah_id' => 'sometimes|exists:rumah,id',
             'penghuni_id' => 'sometimes|exists:penghunis,id',
             'bulan' => 'sometimes|integer|between:1,12',
             'tahun' => 'sometimes|integer',

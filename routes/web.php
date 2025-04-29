@@ -29,9 +29,11 @@ Route::get('/rumah/{id}', [RumahController::class, 'show']);
 Route::put('/rumah/{id}', [RumahController::class, 'update']);
 
 Route::get('/riwayat', [RiwayatPenghuniRumahController::class, 'index'])->name('riwayatpenghunirumah.index');
-Route::get('/riwayat-penghuni-rumah/create', [RiwayatPenghuniRumahController::class, 'create'])->name('riwayatpenghunirumah.create');
-Route::get('/rumah/{id}/riwayat', [RiwayatPenghuniRumahController::class, 'show'])->name('riwayatpenghunirumah.show');
-Route::get('/riwayat-penghuni-rumah/{id}/edit', [RiwayatPenghuniRumahController::class, 'edit'])->name('riwayatpenghunirumah.edit');
+Route::post('/riwayat', [RiwayatPenghuniRumahController::class, 'store'])->name('riwayatpenghunirumah.store');
+Route::get('/riwayat/{id}', [RiwayatPenghuniRumahController::class, 'show'])->name('riwayatpenghunirumah.show');
+Route::put('/riwayat/{id}', [RiwayatPenghuniRumahController::class, 'update'])->name('riwayatpenghunirumah.update');
+Route::delete('/riwayat/{id}', [RiwayatPenghuniRumahController::class, 'destroy'])->name('riwayatpenghunirumah.destroy');
+
 
 Route::get('/pembayaran', [PembayaranController::class, 'index']);
 Route::get('/pembayaran/{id}', [PembayaranController::class, 'show']);

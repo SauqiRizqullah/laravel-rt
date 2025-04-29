@@ -17,7 +17,7 @@ class RumahController extends Controller
         $validated = $request->validate([
             'nomor_rumah' => 'required|string',
             'status_rumah' => 'required|in:dihuni,tidak',
-            'current_penghuni_id' => 'nullable|exists:penghuni,id',
+            'current_penghuni_id' => 'nullable|exists:penghunis,id',
         ]);
 
         $rumah = Rumah::create($validated);
@@ -38,7 +38,7 @@ class RumahController extends Controller
         $validated = $request->validate([
             'nomor_rumah' => 'sometimes|string',
             'status_rumah' => 'sometimes|in:dihuni,tidak',
-            'current_penghuni_id' => 'nullable|exists:penghuni,id',
+            'current_penghuni_id' => 'nullable|exists:penghunis,id',
         ]);
 
         $rumah->update($validated);
