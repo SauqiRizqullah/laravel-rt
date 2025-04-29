@@ -8,6 +8,7 @@ use App\Http\Controllers\RiwayatPenghuniRumahController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KasController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +51,10 @@ Route::delete('/pengeluaran/{id}', [PengeluaranController::class, 'destroy']);
 
 
 Route::get('/api/total-kas', [KasController::class, 'total']);
+
+Route::get('/report/summary-tahunan', [ReportController::class, 'summaryTahunan']);
+
+Route::get('/report/detail/{bulan}', [ReportController::class, 'detailPerBulan']);
 
 Route::get('/test-api', function () {
     return response()->json([

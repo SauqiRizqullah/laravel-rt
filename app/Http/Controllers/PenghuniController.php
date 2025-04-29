@@ -14,13 +14,19 @@ class PenghuniController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $rules = [
             'nama' => 'required|string|max:255',
             'foto_ktp' => 'nullable|image',
             'status' => 'required|in:tetap,kontrak',
-            'no_telepon' => 'required|string',
+            'no_telepon' => ['required', 'regex:/^08[0-9]{8,10}$/'],
             'menikah' => 'required|boolean',
-        ]);
+        ];
+
+        $messages = [
+            'no_telepon.regex' => 'Nomor telepon harus diawali dengan 08 dan memiliki 10 hingga 12 digit.',
+        ];
+
+        $validated = $request->validate($rules, $messages);
 
         if ($request->hasFile('foto_ktp')) {
             $path = $request->file('foto_ktp')->store('ktp', 'public');
@@ -40,21 +46,30 @@ class PenghuniController extends Controller
     {
         $penghuni = Penghuni::findOrFail($id);
 
-        $validated = $request->validate([
-            'nama' => 'sometimes|required|string|max:255',
-            'foto_ktp' => 'nullable|image',
-            'status' => 'sometimes|required|in:tetap,kontrak',
-            'no_telepon' => 'sometimes|required|string',
-            'menikah' => 'sometimes|required|boolean',
-        ]);
+    $rules = [
+        'nama' => 'sometimes|required|string|max:255',
+        'foto_ktp' => 'nullable|image',
+        'status' => 'sometimes|required|in:tetap,kontrak',
+        'no_telepon' => ['sometimes', 'required', 'regex:/^08[0-9]{8,10}$/'],
+        'menikah' => 'sometimes|required|boolean',
+    ];
 
-        if ($request->hasFile('foto_ktp')) {
-            $path = $request->file('foto_ktp')->store('ktp', 'public');
-            $validated['foto_ktp'] = $path;
-        }
+    $messages = [
+        'no_telepon.regex' => 'Nomor telepon harus diawali dengan 08 dan memiliki 10 hingga 12 digit.',
+    ];
 
-        $penghuni->update($validated);
-        return response()->json($penghuni);
+    $validated = $request->validate($rules, $messages);
+
+    // Jika ada file baru, simpan dan timpa
+    if ($request->hasFile('foto_ktp')) {
+        $path = $request->file('foto_ktp')->store('ktp', 'public');
+        $validated['foto_ktp'] = $path;
+    }
+
+    // Jika tidak ada foto baru, maka foto lama tetap dipakai (tidak dimasukkan ke dalam $validated)
+    $penghuni->update($validated);
+
+    return response()->json($penghuni);
     }
 
     public function destroy($id)

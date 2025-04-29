@@ -12,4 +12,14 @@ class RiwayatPenghuniRumah extends Model
         'tanggal_masuk',
         'tanggal_keluar',
     ];
+
+    public function rumah()
+{
+    return $this->belongsTo(Rumah::class);
+}
+
+public function penghuni()
+{
+    return $this->belongsTo(Penghuni::class);
+}
 }

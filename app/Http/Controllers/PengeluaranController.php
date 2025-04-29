@@ -21,6 +21,7 @@ class PengeluaranController extends Controller
             'jumlah' => 'required|integer',
             'bulan' => 'required|integer',
             'tahun' => 'required|integer',
+            'tanggal_pengeluaran' => 'nullable|date',
             'deskripsi' => 'nullable|string',
         ]);
 
@@ -53,6 +54,7 @@ public function update(Request $request, $id)
             'jumlah' => 'required|integer',
             'bulan' => 'required|integer',
             'tahun' => 'required|integer',
+            'tanggal_pengeluaran' => 'nullable|date',
             'deskripsi' => 'nullable|string',
         ]);
 

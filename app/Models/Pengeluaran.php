@@ -14,6 +14,7 @@ class Pengeluaran extends Model
         'jumlah',
         'bulan',
         'tahun',
+        'tanggal_pengeluaran',
         'deskripsi',
     ];
 }

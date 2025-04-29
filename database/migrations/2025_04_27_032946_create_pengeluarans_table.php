@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->integer('bulan');
             $table->integer('tahun');
+            $table->date('tanggal_pengeluaran')->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });

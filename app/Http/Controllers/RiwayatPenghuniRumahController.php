@@ -10,7 +10,9 @@ class RiwayatPenghuniRumahController extends Controller
 {
     public function index()
     {
-        return response()->json(RiwayatPenghuniRumah::all());
+        return response()->json(
+            RiwayatPenghuniRumah::with(['rumah', 'penghuni'])->get()
+        );
     }
 
     public function create()
@@ -31,7 +33,16 @@ class RiwayatPenghuniRumahController extends Controller
         'rumah_id' => 'sometimes|exists:rumah,id',
         'penghuni_id' => 'sometimes|exists:penghunis,id',
         'tanggal_masuk' => 'sometimes|date',
-        'tanggal_keluar' => 'nullable|date',
+        'tanggal_keluar' => [
+            'nullable',
+            'date',
+            function ($attribute, $value, $fail) use ($request) {
+                $masuk = $request->input('tanggal_masuk') ?? $request->route('id') ? RiwayatPenghuniRumah::find($request->route('id'))->tanggal_masuk : null;
+                if ($masuk && $value <= $masuk) {
+                    $fail('Tanggal keluar harus lebih besar dari tanggal masuk.');
+                }
+            }
+        ],
     ]);
 
     $riwayat->update($validated);
@@ -46,7 +57,7 @@ class RiwayatPenghuniRumahController extends Controller
         'penghuni_id' => 'required|exists:penghunis,id',
         'rumah_id' => 'required|exists:rumah,id',
         'tanggal_masuk' => 'required|date',
-        'tanggal_keluar' => 'nullable|date|after_or_equal:tanggal_masuk',
+        'tanggal_keluar' => 'nullable|date|after:tanggal_masuk',
     ]);
 
     $riwayat = RiwayatPenghuniRumah::create($validated);
