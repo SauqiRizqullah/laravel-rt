@@ -35,4 +35,29 @@ class PengeluaranController extends Controller
         $pengeluaran = Pengeluaran::findOrFail($id);
         return response()->json($pengeluaran);
     }
+
+    public function destroy($id)
+{
+    $pengeluaran = Pengeluaran::findOrFail($id);
+    $pengeluaran->delete();
+
+    return response()->json(['message' => 'Pengeluaran berhasil dihapus']);
+}
+
+public function update(Request $request, $id)
+    {
+        $pengeluaran = Pengeluaran::findOrFail($id);
+
+        $validated = $request->validate([
+            'nama_pengeluaran' => 'required|string',
+            'jumlah' => 'required|integer',
+            'bulan' => 'required|integer',
+            'tahun' => 'required|integer',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        $pengeluaran->update($validated);
+
+        return response()->json($pengeluaran);
+    }
 }

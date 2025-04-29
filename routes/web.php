@@ -7,6 +7,7 @@ use App\Http\Controllers\RumahController;
 use App\Http\Controllers\RiwayatPenghuniRumahController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\KasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,10 +17,8 @@ Route::apiResource('posts', PostController::class);
 
 
 Route::get('/penghunis', [PenghuniController::class, 'index'])->name('penghunis.index');
-Route::get('/penghunis/create', [PenghuniController::class, 'create'])->name('penghunis.create');
 Route::post('/penghunis', [PenghuniController::class, 'store'])->name('penghunis.store');
 Route::get('/penghunis/{id}', [PenghuniController::class, 'show'])->name('penghunis.show');
-Route::get('/penghunis/{id}/edit', [PenghuniController::class, 'edit'])->name('penghunis.edit');
 Route::put('/penghunis/{id}', [PenghuniController::class, 'update'])->name('penghunis.update');
 Route::delete('/penghunis/{id}', [PenghuniController::class, 'destroy'])->name('penghunis.destroy');
 
@@ -42,7 +41,15 @@ Route::put('/pembayaran/{id}', [PembayaranController::class, 'update']);
 Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy']);
 
 Route::get('/pengeluaran', [PengeluaranController::class, 'index']);
+Route::get('/pengeluaran/{id}', [PengeluaranController::class, 'show']);
 Route::post('/pengeluaran', [PengeluaranController::class, 'store']);
+Route::put('/pengeluaran/{id}', [PengeluaranController::class, 'update']);
+Route::delete('/pengeluaran/{id}', [PengeluaranController::class, 'destroy']);
+
+// Route untuk total kas RT
+
+
+Route::get('/api/total-kas', [KasController::class, 'total']);
 
 Route::get('/test-api', function () {
     return response()->json([
