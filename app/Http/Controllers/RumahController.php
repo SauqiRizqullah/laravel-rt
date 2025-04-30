@@ -45,4 +45,12 @@ class RumahController extends Controller
 
         return response()->json($rumah);
     }
+
+    public function destroy($id)
+{
+    $rumah = Rumah::findOrFail($id);
+    $rumah->delete();
+
+    return response()->json(['message' => 'Rumah berhasil dihapus.']);
+}
 }

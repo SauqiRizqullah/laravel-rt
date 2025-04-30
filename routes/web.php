@@ -27,6 +27,7 @@ Route::get('/rumah', [RumahController::class, 'index']);
 Route::post('/rumah', [RumahController::class, 'store']);
 Route::get('/rumah/{id}', [RumahController::class, 'show']);
 Route::put('/rumah/{id}', [RumahController::class, 'update']);
+Route::delete('/rumah/{id}', [RumahController::class, 'destroy']);
 
 Route::get('/riwayat', [RiwayatPenghuniRumahController::class, 'index'])->name('riwayatpenghunirumah.index');
 Route::post('/riwayat', [RiwayatPenghuniRumahController::class, 'store'])->name('riwayatpenghunirumah.store');

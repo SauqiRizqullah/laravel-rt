@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('bulan');
             $table->integer('tahun');
             $table->enum('jenis_iuran', ['satpam', 'kebersihan']);
-            $table->integer('jumlah');
+            $table->integer('jumlah')->nullable();
             $table->enum('status_pembayaran', ['lunas', 'belum']);
             $table->date('tanggal_bayar')->nullable();
             $table->timestamps();
