@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RumahSeeder::class,
             RiwayatPenghuniRumahSeeder::class,
             PembayaranSeeder::class,
+            PengeluaranSeeder::class,
         ]);
 
         User::factory()->create([
